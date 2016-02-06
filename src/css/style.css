@@ -1,0 +1,57 @@
+.mosaic {
+	position: relative;
+}
+
+.mosaicRow {
+	position: absolute;
+}
+
+.mosaicRow_0 {
+	top: 0;
+}
+
+.mosaicRow_1 {
+	top: 250px;
+}
+
+.mosaicRow_2 {
+	top: 500px;
+}
+
+.mosaicRow_3 {
+	top: 750px;
+}
+
+.mosaicRow_4 {
+	top: 1000px;
+}
+
+.mosaicRow_5 {
+	top: 1250px;
+}
+
+.mosaicRow_6 {
+	top: 1500px;
+}
+
+.mosaicItem {
+	position: absolute;
+}
+
+.mosaicItem_0 {
+	left: 0;
+}
+
+.mosaicItem_1 {
+	left: 360px;
+}
+
+.mosaicItem_2 {
+	left: 720px;
+}
+
+.mosaicItem img {
+	-webkit-box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);
+	-moz-box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);
+	box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);
+}

@@ -57,7 +57,8 @@ gulp.task('js', function() {
 gulp.task('css', function() {
 	gulp.src(config.paths.css)
 		.pipe(concat('bundle.css'))
-		.pipe(gulp.dest(config.paths.dist + '/css'));
+		.pipe(gulp.dest(config.paths.dist + '/css'))
+        .pipe(connect.reload());
 });
 
 // Migrates images to dist folder
@@ -85,6 +86,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('watch', function() {
+	gulp.watch(config.paths.css, ['css']);
 	gulp.watch(config.paths.html, ['html']);
 	gulp.watch(config.paths.api, ['api']);
 	gulp.watch(config.paths.js, ['js', 'lint']);
