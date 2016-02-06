@@ -1,8 +1,8 @@
 "use strict";
 var React = require('react'),
 	ReactDOM = require('react-dom'),
-	Mosaic = require('./components/Mosaic.jsx');
-
+	Mosaic = require('./components/Mosaic.jsx'),
+	Api = require('./api/Api');
 
 var App = React.createClass({
 	render: function() {

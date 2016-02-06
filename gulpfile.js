@@ -13,6 +13,7 @@ var config = {
 	port: 9005,
 	devBaseUrl: 'http://localhost',
 	paths: {
+		api: './src/api/**',
 		html: './src/*.html',
 		js: ['./src/**/*.js', './src/**/*.jsx'],
 		images: './src/images/*',
@@ -71,6 +72,12 @@ gulp.task('images', function () {
         .pipe(gulp.dest(config.paths.dist));
 });
 
+gulp.task('api', function () {
+    gulp.src(config.paths.api)
+        .pipe(gulp.dest(config.paths.dist + '/api'))
+        .pipe(connect.reload());
+});
+
 gulp.task('lint', function() {
 	return gulp.src(config.paths.js)
 		.pipe(lint({config: 'eslint.config.json'}))
@@ -79,7 +86,8 @@ gulp.task('lint', function() {
 
 gulp.task('watch', function() {
 	gulp.watch(config.paths.html, ['html']);
+	gulp.watch(config.paths.api, ['api']);
 	gulp.watch(config.paths.js, ['js', 'lint']);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'images', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'images', 'api', 'lint', 'open', 'watch']);
