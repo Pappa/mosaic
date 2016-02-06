@@ -55,7 +55,7 @@ var Mosaic = React.createClass({
 			rows.push(<MosaicRow key={catalogue.id} assets={catalogue.assets} index={i} />);
 		});
 		return (
-			<div cssClass="mosaic">
+			<div className="mosaic">
 				{rows} 
 			</div>
 		);
