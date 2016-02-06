@@ -17,7 +17,7 @@ var MosaicRow = React.createClass({
 	render: function() {
 		var items = [];
 		this.props.assets.forEach(function (asset, i) {
-			if (i < 10) {
+			if (i < 4) {
 				items.push(<MosaicItem key={asset.id} asset={asset} />);
 			}
 		});
