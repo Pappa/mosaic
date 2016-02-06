@@ -16,7 +16,7 @@ var config = {
 		html: './src/*.html',
 		js: './src/**/*.js',
 		images: './src/images/*',
-		css: [],
+		css: './src/css/*',
 		dist: './dist',
 		mainJs: './src/main.js'
 	}
