@@ -15,31 +15,25 @@ body {
 }
 
 .mosaicRow_0 {
-	top: 0;
+	top: -250px;
+	opacity: 0;
 }
 
 .mosaicRow_1 {
-	top: 250px;
+	top: 0;
 }
 
 .mosaicRow_2 {
-	top: 500px;
+	top: 250px;
 }
 
 .mosaicRow_3 {
-	top: 750px;
+	top: 500px;
 }
 
 .mosaicRow_4 {
-	top: 1000px;
-}
-
-.mosaicRow_5 {
-	top: 1250px;
-}
-
-.mosaicRow_6 {
-	top: 1500px;
+	top: 750px;
+	opacity: 0;
 }
 
 .mosaicItem {
@@ -47,15 +41,25 @@ body {
 }
 
 .mosaicItem_0 {
-	left: 0;
+	left: -360px;
+	opacity: 0;
 }
 
 .mosaicItem_1 {
-	left: 360px;
+	left: 0;
 }
 
 .mosaicItem_2 {
+	left: 360px;
+}
+
+.mosaicItem_3 {
 	left: 720px;
+}
+
+.mosaicItem_4 {
+	left: 1080px;
+	opacity: 0;
 }
 
 .mosaicItem img {
