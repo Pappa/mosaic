@@ -1,15 +1,13 @@
 "use strict";
 var React = require('react'),
 	ReactDOM = require('react-dom'),
-	Mosaic = require('./components/Mosaic');
+	Mosaic = require('./components/Mosaic.jsx');
 
 
 var App = React.createClass({
 	render: function() {
 		return (
-			<div>
-				<Mosaic />
-			</div>
+			<Mosaic />
 		);
 	}
 });
