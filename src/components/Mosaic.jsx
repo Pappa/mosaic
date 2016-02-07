@@ -1,41 +1,7 @@
 "use strict";
 var React = require('react'),
-	Api = require('../api/Api');
-
-var MosaicItem = React.createClass({
-	render: function() {
-		var title = (this.props.asset && this.props.asset.title) ? this.props.asset.title : "",
-			url = (this.props.asset && this.props.asset.art) ? this.props.asset.art.url : "";
-		return (
-			<div className={"mosaicItem mosaicItem_" + (this.props.index)}>
-				<img src={url} />
-				<p>{title}</p>
-			</div>
-		);
-	}
-});
-
-var MosaicRow = React.createClass({
-	getInitialState: function() {
-		return {
-			visibleRows: 3,
-			highlightedItem: 1 // remove this from child component state
-		};
-	},
-	render: function() {
-		var items = [],
-			isHighlighted = false;
-		this.props.assets.forEach(function (asset, i) {
-			isHighlighted = (i === this.state.highlightedItem);
-			items.push(<MosaicItem key={i} highlighted={isHighlighted} asset={asset} index={i} />);
-		}, this);
-		return (
-			<div className={"mosaicRow mosaicRow_" + (this.props.index)}>
-				{items}
-			</div>
-		);
-	}
-});
+	Api = require('../api/Api'),
+	MosaicRow = require('./MosaicRow.jsx');
 
 var Mosaic = React.createClass({
 	getInitialState: function() {
@@ -66,7 +32,7 @@ var Mosaic = React.createClass({
 		var rows = [],
 			isHighlighted = false;
 		this.state.dom.catalogues.forEach(function (catalogue, i) {
-			isHighlighted = (i === this.state.highlightedItem);
+			isHighlighted = (i === this.state.highlightedRow);
 			rows.push(<MosaicRow key={i} highlighted={isHighlighted} assets={catalogue.assets} index={i} />);
 		}, this);
 		return (
@@ -83,36 +49,24 @@ var Mosaic = React.createClass({
 				}
 			},
 			rowsToAdd = this.state.visibleRows + 1,
-			itemsPerRow = 5,
+			itemsPerRow = this.state.visibleItems + 2,
 			assets = [],
-			catalogue = {},
-			i,
-			j;
+			catalogue,
+			i;
 
 		// add an empty row
-		for (i = 0; i < itemsPerRow; i++) {
-			assets.push({});
-		}
+		assets = Array.apply(null, Array(itemsPerRow)).map(function () { return {}; });
 		state.dom.catalogues.push({ assets: assets });
 
-
 		for (i = 0; i < rowsToAdd; i++) {
-			catalogue.assets = [];
-			// add the 0 element
-			catalogue.assets.push({});
+			catalogue = {
+				assets: [{}]
+			};
 			if (catalogues[i]) {
 				catalogue.id = catalogues[i].id;
-				catalogue.title = catalogues[i].title;
-				for (j = 0; j < itemsPerRow; j++) {
-					if (catalogues[i].assets[j]) {
-						catalogue.assets.push(catalogues[i].assets[j]);
-					} else {
-						catalogue.assets.push({});
-					}
-				}
-
+				catalogue.name = catalogues[i].name;
+				catalogue.assets = catalogue.assets.concat(catalogues[i].assets.slice(0, itemsPerRow - 1));
 			}
-
 			state.dom.catalogues.push(catalogue);
 		}
 
