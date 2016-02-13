@@ -3,6 +3,9 @@ var React = require('react'),
 	MosaicItem = require('./MosaicItem.jsx');
 
 var MosaicRow = React.createClass({
+	shouldComponentUpdate: function(newProps, newState) {
+	    return (newProps.highlightedItem !== this.props.highlightedItem);
+	},
 	render: function() {
 		var items = [],
 			isHighlighted = false;

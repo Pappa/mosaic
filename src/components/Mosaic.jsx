@@ -66,6 +66,9 @@ var Mosaic = React.createClass({
 			if (catalogues[i]) {
 				catalogue.id = catalogues[i].id;
 				catalogue.name = catalogues[i].name;
+				// TODO: Remove slice here - need to reference state.catalogues
+				// in order to reference them later during navigation without
+				// needing to re-slice each time
 				catalogue.assets = catalogue.assets.concat(catalogues[i].assets.slice(0, itemsPerRow - 1));
 			}
 			state.dom.catalogues.push(catalogue);
@@ -94,14 +97,28 @@ var Mosaic = React.createClass({
 		}
 	},
 	horizontalKeyHandler: function (direction) {
-		this.setState({
-			highlightedItem: this.state.highlightedItem + direction
-		});
+		// TODO: temporary - to ensure we don't navigate outside the visible area
+		var newItem = this.state.highlightedItem + direction;
+		if (newItem < 1 || newItem > this.state.visibleItems) {
+			return false;
+		}
+		if (this.state.dom.catalogues[this.state.highlightedRow].assets[this.state.highlightedItem + direction]) {
+			this.setState({
+				highlightedItem: this.state.highlightedItem + direction
+			});
+		}
 	},
 	verticalKeyHandler: function (direction) {
-		this.setState({
-			highlightedRow: this.state.highlightedRow + direction
-		});
+		// TODO: temporary - to ensure we don't navigate outside the visible area
+		var newItem = this.state.highlightedRow + direction;
+		if (newItem < 1 || newItem > this.state.visibleRows) {
+			return false;
+		}
+		if (this.state.dom.catalogues[this.state.highlightedRow + direction]) {
+			this.setState({
+				highlightedRow: this.state.highlightedRow + direction
+			});
+		}
 	}
  });
 
