@@ -1,6 +1,7 @@
 "use strict";
 var React = require('react'),
 	Api = require('../api/Api'),
+	Keys = require('../common/Keys'),
 	MosaicRow = require('./MosaicRow.jsx');
 
 var Mosaic = React.createClass({
@@ -30,13 +31,13 @@ var Mosaic = React.createClass({
 	},
 	render: function() {
 		var rows = [],
-			isHighlighted = false;
+			highlightedItem = null;
 		this.state.dom.catalogues.forEach(function (catalogue, i) {
-			isHighlighted = (i === this.state.highlightedRow);
-			rows.push(<MosaicRow key={i} highlighted={isHighlighted} assets={catalogue.assets} index={i} />);
+			highlightedItem = (i === this.state.highlightedRow) ? this.state.highlightedItem : null;
+			rows.push(<MosaicRow key={i} highlightedItem={highlightedItem} assets={catalogue.assets} index={i} />);
 		}, this);
 		return (
-			<div className="mosaic">
+			<div className="mosaic" tabIndex="0" onKeyDown={this.keyDownHandler}>
 				{rows} 
 			</div>
 		);
@@ -71,7 +72,37 @@ var Mosaic = React.createClass({
 		}
 
 		this.setState(state);
+	},
+	keyDownHandler: function (e) {
+		e.preventDefault();
+		switch (e.keyCode) {
+			case Keys.UP:
+				this.verticalKeyHandler(-1);
+			break;
+			case Keys.DOWN:
+				this.verticalKeyHandler(1);
+			break;
+			case Keys.LEFT:
+				this.horizontalKeyHandler(-1);
+			break;
+			case Keys.RIGHT:
+				this.horizontalKeyHandler(1);
+			break;
+			case Keys.SELECT:
+				console.log("SELECT");
+			break;
+		}
+	},
+	horizontalKeyHandler: function (direction) {
+		this.setState({
+			highlightedItem: this.state.highlightedItem + direction
+		});
+	},
+	verticalKeyHandler: function (direction) {
+		this.setState({
+			highlightedRow: this.state.highlightedRow + direction
+		});
 	}
-});
+ });
 
 module.exports = Mosaic;
