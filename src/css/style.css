@@ -69,7 +69,11 @@ body {
 }
 
 .highlighted img {
--webkit-box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
--moz-box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
-box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
+	-moz-box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
+	box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
+}
+
+.highlighted p {
+	font-weight: bold;
 }
