@@ -2,7 +2,8 @@
 var React = require('react'),
 	Api = require('../api/Api'),
 	Keys = require('../common/Keys'),
-	MosaicRow = require('./MosaicRow.jsx');
+	MosaicRow = require('./MosaicRow.jsx'),
+	Events = require('../common/Events');
 
 var Mosaic = React.createClass({
 	getInitialState: function() {
@@ -16,6 +17,9 @@ var Mosaic = React.createClass({
 			visibleItems: 3,
 			highlightedItem: 1
 		};
+	},
+	componentWillMount: function() {
+	      window.addEventListener("keydown", this.keyDownHandler, false);
 	},
 	componentDidMount: function() {
 		if (this.isMounted()) {
@@ -37,7 +41,7 @@ var Mosaic = React.createClass({
 			rows.push(<MosaicRow key={i} highlightedItem={highlightedItem} assets={catalogue.assets} index={i} />);
 		}, this);
 		return (
-			<div className="mosaic" tabIndex="0" onKeyDown={this.keyDownHandler}>
+			<div className="mosaic">
 				{rows} 
 			</div>
 		);

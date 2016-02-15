@@ -38,6 +38,8 @@ body {
 
 .mosaicItem {
 	position: absolute;
+	width: 343px;
+	height: 248px;
 }
 
 .mosaicItem_0 {
@@ -66,12 +68,14 @@ body {
 	-webkit-box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);
 	-moz-box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);
 	box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);
+	border: 1px solid black;
 }
 
 .highlighted img {
 	-webkit-box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
 	-moz-box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
 	box-shadow: 11px 11px 8px 3px rgba(0,0,0,0.75);
+	border: 1px solid white;
 }
 
 .highlighted p {
