@@ -23,8 +23,7 @@ var Mosaic = React.createClass({
 	},
 	componentDidMount: function() {
 		if (this.isMounted()) {
-			Api.getCatalogues()
-				.then(Api.getAssetsForCatalogues)
+			this.props.getData()
 				.then(function (catalogues) {
 					this.setStateOnLoad(catalogues);
 				}.bind(this))

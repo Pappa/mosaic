@@ -4,10 +4,15 @@ var React = require('react'),
 	Mosaic = require('./components/Mosaic.jsx'),
 	Api = require('./api/Api');
 
+var getData = function () {
+	return Api.getCatalogues()
+		.then(Api.getAssetsForCatalogues);
+};
+
 var App = React.createClass({
 	render: function() {
 		return (
-			<Mosaic />
+			<Mosaic getData={getData} />
 		);
 	}
 });
