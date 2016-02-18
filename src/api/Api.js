@@ -1,5 +1,4 @@
 "use strict";
-var Qajax = require("qajax");
 
 var Api = (function () {
 
@@ -10,7 +9,9 @@ var Api = (function () {
 		 * @return {Promise}
 		 */
 		getCatalogues: function () {
-			return Qajax.getJSON("api/json/categories.json");
+			return fetch("api/json/categories.json").then(function (response) {
+				return response.json();
+			});
 		},
 
 		/**
@@ -45,11 +46,13 @@ var Api = (function () {
 		 * @return {Promise}
 		 */
 		getAssetsForCatalogue: function (catalogue) {
-			return Qajax.getJSON("api/json/category" + catalogue.id + ".json")
+			return fetch("api/json/category" + catalogue.id + ".json").then(function (response) {
+				return response.json();
+			});
 		}
 
 	};
-	
+
 }());
 
 module.exports = Api;
