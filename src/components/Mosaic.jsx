@@ -37,7 +37,7 @@ var Mosaic = React.createClass({
 	render: function() {
 		var rows = [],
 			rowProps = {};
-		this.state.yPositions.forEach(function (y, i) {
+		this.state.yPositions.forEach(function (y, i, yPositions) {
 			if (this.state.dom.catalogues[i]) {
 				rowProps = {
 					key: i,
@@ -45,7 +45,8 @@ var Mosaic = React.createClass({
 					highlightedItem: (i === this.state.highlightedRow) ? this.state.highlightedItem : null,
 					assets: this.state.dom.catalogues[i].assets,
 					index: i,
-					xPositions: this.state.xPositions
+					xPositions: this.state.xPositions,
+					opacity: (i === 0 || i === yPositions.length - 1) ? 0 : 1
 				};
 				rows.push(<MosaicRow {...rowProps} />);
 			}

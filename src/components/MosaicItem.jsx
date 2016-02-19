@@ -8,8 +8,11 @@ var MosaicItem = React.createClass({
 	render: function() {
 		var title = (this.props.asset && this.props.asset.title) ? this.props.asset.title : "",
 			url = (this.props.asset && this.props.asset.art) ? this.props.asset.art.url : "",
-			cssClass = "mosaicItem mosaicItem_" + this.props.index,
-			style = { left: this.props.x };
+			cssClass = "mosaicItem",
+			style = {
+				left: this.props.x,
+				opacity: this.props.opacity
+			};
 		if (this.props.highlighted) {
 			cssClass += " highlighted";
 		}

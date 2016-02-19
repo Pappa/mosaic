@@ -14,44 +14,10 @@ body {
 	position: absolute;
 }
 
-.mosaicRow_0 {
-	opacity: 0;
-}
-
-.mosaicRow_1 {
-}
-
-.mosaicRow_2 {
-}
-
-.mosaicRow_3 {
-}
-
-.mosaicRow_4 {
-	opacity: 0;
-}
-
 .mosaicItem {
 	position: absolute;
 	width: 343px;
 	height: 248px;
-}
-
-.mosaicItem_0 {
-	opacity: 0;
-}
-
-.mosaicItem_1 {
-}
-
-.mosaicItem_2 {
-}
-
-.mosaicItem_3 {
-}
-
-.mosaicItem_4 {
-	opacity: 0;
 }
 
 .mosaicItem img {
