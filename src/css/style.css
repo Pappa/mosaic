@@ -38,24 +38,19 @@ body {
 }
 
 .mosaicItem_0 {
-	left: -360px;
 	opacity: 0;
 }
 
 .mosaicItem_1 {
-	left: 0;
 }
 
 .mosaicItem_2 {
-	left: 360px;
 }
 
 .mosaicItem_3 {
-	left: 720px;
 }
 
 .mosaicItem_4 {
-	left: 1080px;
 	opacity: 0;
 }
 

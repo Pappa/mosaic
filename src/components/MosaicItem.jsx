@@ -8,12 +8,13 @@ var MosaicItem = React.createClass({
 	render: function() {
 		var title = (this.props.asset && this.props.asset.title) ? this.props.asset.title : "",
 			url = (this.props.asset && this.props.asset.art) ? this.props.asset.art.url : "",
-			cssClass = "mosaicItem mosaicItem_" + this.props.index;
+			cssClass = "mosaicItem mosaicItem_" + this.props.index,
+			style = { left: this.props.x };
 		if (this.props.highlighted) {
 			cssClass += " highlighted";
 		}
 		return (
-			<div className={cssClass}>
+			<div style={style} className={cssClass}>
 				<img src={url} />
 				<p>{title}</p>
 			</div>
