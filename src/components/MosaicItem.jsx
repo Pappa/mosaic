@@ -14,7 +14,7 @@ var MosaicItem = React.createClass({
 		}
 		return (
 			<div className={cssClass}>
-				<img src={url} onMouseEnter={this.props.animate} />
+				<img src={url} />
 				<p>{title}</p>
 			</div>
 		);

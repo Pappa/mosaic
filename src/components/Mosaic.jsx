@@ -15,7 +15,8 @@ var Mosaic = React.createClass({
 			visibleRows: 3,
 			highlightedRow: 1,
 			visibleItems: 3,
-			highlightedItem: 1
+			highlightedItem: 1,
+			yPositions: ["-250px", "0", "250px", "500px", "750px"]
 		};
 	},
 	componentWillMount: function() {
@@ -34,14 +35,18 @@ var Mosaic = React.createClass({
 	},
 	render: function() {
 		var rows = [],
-			highlightedItem = null;
-		this.state.dom.catalogues.forEach(function (catalogue, i) {
-			highlightedItem = (i === this.state.highlightedRow) ? this.state.highlightedItem : null;
-			rows.push(<MosaicRow key={i} highlightedItem={highlightedItem} assets={catalogue.assets} index={i} />);
+			highlightedItem = null,
+			catalogue;
+		this.state.yPositions.forEach(function (y, i) {
+			catalogue = this.state.dom.catalogues[i];
+			if (catalogue) {
+				highlightedItem = (i === this.state.highlightedRow) ? this.state.highlightedItem : null;
+				rows.push(<MosaicRow key={i} y={y} highlightedItem={highlightedItem} assets={catalogue.assets} index={i} />);
+			}
 		}, this);
 		return (
 			<div className="mosaic">
-				{rows} 
+				{rows}
 			</div>
 		);
 	},

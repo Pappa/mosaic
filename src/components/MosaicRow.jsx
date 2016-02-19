@@ -11,16 +11,13 @@ var MosaicRow = React.createClass({
 			isHighlighted = false;
 		this.props.assets.forEach(function (asset, i) {
 			isHighlighted = (i === this.props.highlightedItem);
-			items.push(<MosaicItem key={i} highlighted={isHighlighted} asset={asset} index={i} animate={this.animate} />);
+			items.push(<MosaicItem key={i} highlighted={isHighlighted} asset={asset} index={i} />);
 		}, this);
 		return (
-			<div className={"mosaicRow mosaicRow_" + (this.props.index)}>
+			<div style={{top: this.props.y}} className={"mosaicRow mosaicRow_" + (this.props.index)}>
 				{items}
 			</div>
 		);
-	},
-	animate: function () {
-		console.log("animate called on: " + this.props.index);
 	}
 });
 

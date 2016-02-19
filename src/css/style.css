@@ -15,24 +15,19 @@ body {
 }
 
 .mosaicRow_0 {
-	top: -250px;
 	opacity: 0;
 }
 
 .mosaicRow_1 {
-	top: 0;
 }
 
 .mosaicRow_2 {
-	top: 250px;
 }
 
 .mosaicRow_3 {
-	top: 500px;
 }
 
 .mosaicRow_4 {
-	top: 750px;
 	opacity: 0;
 }
 
