@@ -16,7 +16,7 @@ var Mosaic = React.createClass({
 			highlightedRow: 1,
 			visibleItems: 3,
 			highlightedItem: 1,
-			yPositions: ["-250px", "0", "250px", "500px", "750px"]
+			yPositions: [-250, 0, 250, 500, 750]
 		};
 	},
 	componentWillMount: function() {

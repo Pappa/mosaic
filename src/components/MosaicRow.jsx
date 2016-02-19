@@ -8,13 +8,19 @@ var MosaicRow = React.createClass({
 	},
 	render: function() {
 		var items = [],
-			isHighlighted = false;
+			style = { top: this.props.y },
+			itemProps = {};
 		this.props.assets.forEach(function (asset, i) {
-			isHighlighted = (i === this.props.highlightedItem);
-			items.push(<MosaicItem key={i} highlighted={isHighlighted} asset={asset} index={i} />);
+			itemProps = {
+				key: i,
+				highlighted: (i === this.props.highlightedItem),
+				asset: asset,
+				index: i
+			};
+			items.push(<MosaicItem {...itemProps} />);
 		}, this);
 		return (
-			<div style={{top: this.props.y}} className={"mosaicRow mosaicRow_" + (this.props.index)}>
+			<div style={style} className={"mosaicRow mosaicRow_" + (this.props.index)}>
 				{items}
 			</div>
 		);
