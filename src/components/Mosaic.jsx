@@ -70,26 +70,31 @@ var Mosaic = React.createClass({
 			catalogue,
 			i;
 
-		// add an empty row
-		assets = Array.apply(null, Array(itemsPerRow)).map(function () { return {}; });
-		state.dom.catalogues.push({ assets: assets });
+		this.addEmptyRow(state, itemsPerRow);
 
 		for (i = 0; i < rowsToAdd; i++) {
-			catalogue = {
-				assets: [{}]
-			};
-			if (catalogues[i]) {
-				catalogue.id = catalogues[i].id;
-				catalogue.name = catalogues[i].name;
-				// TODO: Remove slice here - need to reference state.catalogues
-				// in order to reference them later during navigation without
-				// needing to re-slice each time
-				catalogue.assets = catalogue.assets.concat(catalogues[i].assets.slice(0, itemsPerRow - 1));
-			}
-			state.dom.catalogues.push(catalogue);
+			this.addRow(state, catalogues, i, 0);
 		}
 
 		this.setState(state);
+	},
+	addEmptyRow: function (state, itemsPerRow) {
+		var assets = Array.apply(null, Array(itemsPerRow)).map(function () { return {}; });
+		state.dom.catalogues.push({ assets: assets });
+	},
+	addRow: function (state, catalogues, catalogueIndex, startItemIndex) {
+		var catalogue = {
+				assets: [{}]
+			},
+			i;
+		if (catalogues[catalogueIndex]) {
+			catalogue.id = catalogues[catalogueIndex].id;
+			catalogue.name = catalogues[catalogueIndex].name;
+			for (i = startItemIndex; i < startItemIndex + this.state.visibleItems; i++) {
+				catalogue.assets.push(catalogues[catalogueIndex].assets[i]);
+			}
+		}
+		state.dom.catalogues.push(catalogue);
 	},
 	keyDownHandler: function (e) {
 		e.preventDefault();
