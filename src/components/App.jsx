@@ -81,8 +81,7 @@ var App = React.createClass({
 		var newItem = this.state.highlightedItem + direction;
 		if (newItem < 1 || newItem > this.state.visibleItems) {
 			this.navigateHorizontal(direction);
-		}
-		if (this.state.dom.items[this.state.highlightedItem + direction]) {
+		} else if (this.state.dom.items[this.state.highlightedItem + direction]) {
 			this.setState({
 				highlightedItem: this.state.highlightedItem + direction
 			});
