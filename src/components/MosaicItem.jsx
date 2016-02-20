@@ -6,8 +6,8 @@ var MosaicItem = React.createClass({
 	    return (newProps.highlighted !== this.props.highlighted);
 	},
 	render: function() {
-		var title = (this.props.asset && this.props.asset.title) ? this.props.asset.title : "",
-			url = (this.props.asset && this.props.asset.art) ? this.props.asset.art.url : "",
+		var title = (this.props.item && this.props.item.title) ? this.props.item.title : "",
+			url = (this.props.item && this.props.item.art) ? this.props.item.art.url : "",
 			cssClass = "mosaicItem",
 			style = {
 				left: this.props.x,

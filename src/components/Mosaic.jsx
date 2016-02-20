@@ -8,14 +8,16 @@ var React = require('react'),
 var Mosaic = React.createClass({
 	getInitialState: function() {
 		return {
-			catalogues: [],
+			rows: [],
 			dom: {
-				catalogues: []
+				rows: []
 			},
 			visibleRows: 3,
 			highlightedRow: 1,
+			highlightedRowData: 0,
 			visibleItems: 3,
 			highlightedItem: 1,
+			highlightedItemData: 0,
 			yPositions: [-250, 0, 250, 500, 750],
 			xPositions: [-360, 0, 360, 720, 1080]
 		};
@@ -26,8 +28,8 @@ var Mosaic = React.createClass({
 	componentDidMount: function() {
 		if (this.isMounted()) {
 			this.props.getData()
-				.then(function (catalogues) {
-					this.setStateOnLoad(catalogues);
+				.then(function (rows) {
+					this.setStateOnLoad(rows);
 				}.bind(this))
 				.catch(function (error) {
 					console.log(error);
@@ -38,12 +40,12 @@ var Mosaic = React.createClass({
 		var rows = [],
 			rowProps = {};
 		this.state.yPositions.forEach(function (y, i, yPositions) {
-			if (this.state.dom.catalogues[i]) {
+			if (this.state.dom.rows[i]) {
 				rowProps = {
 					key: i,
 					y: y,
 					highlightedItem: (i === this.state.highlightedRow) ? this.state.highlightedItem : null,
-					assets: this.state.dom.catalogues[i].assets,
+					items: this.state.dom.rows[i].items,
 					index: i,
 					xPositions: this.state.xPositions,
 					opacity: (i === 0 || i === yPositions.length - 1) ? 0 : 1
@@ -57,44 +59,44 @@ var Mosaic = React.createClass({
 			</div>
 		);
 	},
-	setStateOnLoad: function (catalogues) {
+	setStateOnLoad: function (rows) {
 		var state = {
-				catalogues: catalogues,
+				rows: rows,
 				dom: {
-					catalogues: []
+					rows: []
 				}
 			},
 			rowsToAdd = this.state.visibleRows + 1,
 			itemsPerRow = this.state.visibleItems + 2,
-			assets = [],
-			catalogue,
+			items = [],
+			row,
 			i;
 
-		this.addEmptyRow(state, itemsPerRow);
+		state.dom.rows.push(this.getEmptyRow(state, itemsPerRow));
 
 		for (i = 0; i < rowsToAdd; i++) {
-			this.addRow(state, catalogues, i, 0);
+			this.addRow(state, rows, i, 0);
 		}
 
 		this.setState(state);
 	},
-	addEmptyRow: function (state, itemsPerRow) {
-		var assets = Array.apply(null, Array(itemsPerRow)).map(function () { return {}; });
-		state.dom.catalogues.push({ assets: assets });
+	getEmptyRow: function (state, itemsPerRow) {
+		var items = Array.apply(null, Array(itemsPerRow)).map(function () { return {}; });
+		return { items: items };
 	},
-	addRow: function (state, catalogues, catalogueIndex, startItemIndex) {
-		var catalogue = {
-				assets: [{}]
+	addRow: function (state, rows, rowIndex, startItemIndex) {
+		var row = {
+				items: [{}]
 			},
 			i;
-		if (catalogues[catalogueIndex]) {
-			catalogue.id = catalogues[catalogueIndex].id;
-			catalogue.name = catalogues[catalogueIndex].name;
+		if (rows[rowIndex]) {
+			row.id = rows[rowIndex].id;
+			row.name = rows[rowIndex].name;
 			for (i = startItemIndex; i < startItemIndex + this.state.visibleItems; i++) {
-				catalogue.assets.push(catalogues[catalogueIndex].assets[i]);
+				row.items.push(rows[rowIndex].items[i]);
 			}
 		}
-		state.dom.catalogues.push(catalogue);
+		state.dom.rows.push(row);
 	},
 	keyDownHandler: function (e) {
 		e.preventDefault();
@@ -117,28 +119,32 @@ var Mosaic = React.createClass({
 		}
 	},
 	horizontalKeyHandler: function (direction) {
-		// TODO: temporary - to ensure we don't navigate outside the visible area
 		var newItem = this.state.highlightedItem + direction;
 		if (newItem < 1 || newItem > this.state.visibleItems) {
-			return false;
+			this.navigateHorizontal(direction);
 		}
-		if (this.state.dom.catalogues[this.state.highlightedRow].assets[this.state.highlightedItem + direction]) {
+		if (this.state.dom.rows[this.state.highlightedRow].items[this.state.highlightedItem + direction]) {
 			this.setState({
 				highlightedItem: this.state.highlightedItem + direction
 			});
 		}
 	},
 	verticalKeyHandler: function (direction) {
-		// TODO: temporary - to ensure we don't navigate outside the visible area
 		var newItem = this.state.highlightedRow + direction;
 		if (newItem < 1 || newItem > this.state.visibleRows) {
-			return false;
+			this.navigateVertical(direction);
 		}
-		if (this.state.dom.catalogues[this.state.highlightedRow + direction]) {
+		if (this.state.dom.rows[this.state.highlightedRow + direction]) {
 			this.setState({
 				highlightedRow: this.state.highlightedRow + direction
 			});
 		}
+	},
+	navigateHorizontal: function (direction) {
+		console.log("navigateHorizontal");
+	},
+	navigateVertical: function (direction) {
+		console.log("navigateVertical");
 	}
  });
 

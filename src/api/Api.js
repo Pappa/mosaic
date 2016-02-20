@@ -29,7 +29,7 @@ var Api = (function () {
 					var catalogueData = {
 						id: catalogue.id,
 						name: catalogue.name,
-						assets: assets
+						items: assets
 					};
 					accumulator.push(catalogueData);
 				});

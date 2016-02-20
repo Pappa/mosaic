@@ -14,11 +14,11 @@ var MosaicRow = React.createClass({
 			},
 			itemProps = {};
 		this.props.xPositions.forEach(function (x, i, xPositions) {
-			if (this.props.assets[i]) {
+			if (this.props.items[i]) {
 				itemProps = {
 					key: i,
 					highlighted: (i === this.props.highlightedItem),
-					asset: this.props.assets[i],
+					item: this.props.items[i],
 					index: i,
 					x: x,
 					opacity: (i === 0 || i === xPositions.length - 1) ? 0 : 1
