@@ -1,25 +1,16 @@
 "use strict";
 var React = require('react'),
 	ReactDOM = require('react-dom'),
-	Mosaic = require('./components/Mosaic.jsx'),
+	App = require('./components/App.jsx'),
 	Api = require('./api/Api');
 
 var getData = function () {
-	return Api.getCatalogues()
-		.then(Api.getAssetsForCatalogues);
+	return Api.getAssetsForCatalogue({ id: 1 });
 };
-
-var App = React.createClass({
-	render: function() {
-		return (
-			<Mosaic getData={getData} />
-		);
-	}
-});
 
 function render() {
 	ReactDOM.render(
-		<App />, 
+		<App getData={getData} />, 
 		document.getElementById('app')
 	);
 }

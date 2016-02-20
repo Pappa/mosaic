@@ -4,23 +4,17 @@ body {
 	color: white;
 }
 
-.mosaic {
-	position: relative;
-	top: 20px;
-	left: 20px;
-}
-
-.mosaicRow {
+.list {
 	position: absolute;
 }
 
-.mosaicItem {
+.listItem {
 	position: absolute;
 	width: 343px;
 	height: 248px;
 }
 
-.mosaicItem img {
+.listItem img {
 	-webkit-box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);
 	-moz-box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);
 	box-shadow: 10px 10px 8px 1px rgba(0,0,0,0.5);

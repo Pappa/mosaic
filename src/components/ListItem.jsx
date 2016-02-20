@@ -1,14 +1,14 @@
 "use strict";
 var React = require('react');
 
-var MosaicItem = React.createClass({
+var ListItem = React.createClass({
 	shouldComponentUpdate: function(newProps, newState) {
 	    return (newProps.highlighted !== this.props.highlighted);
 	},
 	render: function() {
 		var title = (this.props.item && this.props.item.title) ? this.props.item.title : "",
 			url = (this.props.item && this.props.item.art) ? this.props.item.art.url : "",
-			cssClass = "mosaicItem",
+			cssClass = "listItem",
 			style = {
 				left: this.props.x,
 				opacity: this.props.opacity
@@ -25,4 +25,4 @@ var MosaicItem = React.createClass({
 	}
 });
 
-module.exports = MosaicItem;
+module.exports = ListItem;

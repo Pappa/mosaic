@@ -1,8 +1,8 @@
 "use strict";
 var React = require('react'),
-	MosaicItem = require('./MosaicItem.jsx');
+	ListItem = require('./ListItem.jsx');
 
-var MosaicRow = React.createClass({
+var HorizontalList = React.createClass({
 	shouldComponentUpdate: function(newProps, newState) {
 	    return (newProps.highlightedItem !== this.props.highlightedItem);
 	},
@@ -19,19 +19,18 @@ var MosaicRow = React.createClass({
 					key: i,
 					highlighted: (i === this.props.highlightedItem),
 					item: this.props.items[i],
-					index: i,
 					x: x,
 					opacity: (i === 0 || i === xPositions.length - 1) ? 0 : 1
 				};
-				items.push(<MosaicItem {...itemProps} />);
+				items.push(<ListItem {...itemProps} />);
 			}
 		}, this);
 		return (
-			<div style={style} className="mosaicRow">
+			<div style={style} className="list">
 				{items}
 			</div>
 		);
 	}
 });
 
-module.exports = MosaicRow;
+module.exports = HorizontalList;
