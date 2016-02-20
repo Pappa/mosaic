@@ -79,7 +79,9 @@ var App = React.createClass({
 	},
 	horizontalKeyHandler: function (direction) {
 		var newItem = this.state.highlightedItem + direction;
-		if (newItem < 1 || newItem > this.state.visibleItems) {
+		if (newItem < 1) {
+			return;
+		} else if (newItem > this.state.visibleItems) {
 			this.navigateHorizontal(direction);
 		} else if (this.state.dom.items[this.state.highlightedItem + direction]) {
 			this.setState({
