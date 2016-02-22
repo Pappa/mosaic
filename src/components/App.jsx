@@ -95,15 +95,18 @@ var App = React.createClass({
 			},
 			xIndex;
 		if (this.state.data[this.state.highlightedData + direction]) {
+			// set the next data as highlighted
 			state.highlightedData = this.state.highlightedData + direction;
+			// set the next dom element as highlighted
 			state.highlightedItem = this.state.highlightedItem + direction;
-
+			// correct for first and last
 			if (state.highlightedItem < 0) {
 				state.highlightedItem = this.state.xPositions.length - 1;
 			} else if (state.highlightedItem === this.state.xPositions.length) {
 				state.highlightedItem = 0;
 			}
 
+			// move all items to new positions
 			this.state.items.forEach(function (item, i) {
 				var newItem = item;
 				xIndex = this.state.xPositions.indexOf(newItem.x) - direction;
@@ -115,8 +118,8 @@ var App = React.createClass({
 					newItem = this.state.data[this.state.highlightedData + direction];
 				}
 				newItem.x = this.state.xPositions[xIndex];
-				newItem.opacity = (xIndex === 0 || xIndex > this.state.visibleItems) ? 0 : 1;
-				console.log(xIndex, newItem.x, newItem.opacity);
+				//newItem.opacity = (xIndex === 0 || xIndex > this.state.visibleItems) ? 0 : 1;
+				console.log(xIndex, newItem.x);
 				state.items.push(newItem);
 			}, this);
 
