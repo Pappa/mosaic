@@ -8,13 +8,11 @@ var React = require('react'),
 var App = React.createClass({
 	getInitialState: function() {
 		return {
+			data: [],
 			items: [],
-			dom: {
-				items: []
-			},
 			visibleItems: 3,
 			highlightedItem: 1,
-			firstVisibleData: 0,
+			highlightedData: 0,
 			xPositions: [-360, 0, 360, 720, 1080]
 		};
 	},
@@ -33,10 +31,10 @@ var App = React.createClass({
 		}
 	},
 	render: function() {
-		if (this.state.dom.items.length) {
+		if (this.state.items.length) {
 			var listProps = {
 				highlightedItem: this.state.highlightedItem,
-				items: this.state.dom.items,
+				items: this.state.items,
 				xPositions: this.state.xPositions
 			};
 			return (
@@ -48,18 +46,16 @@ var App = React.createClass({
 			);
 		}
 	},
-	setStateOnLoad: function (items) {
+	setStateOnLoad: function (data) {
 		var state = {
-				items: items,
-				dom: {
-					items: [{ x: this.state.xPositions[0], opacity: 0 }]
-				}
+				data: data,
+				items: [{ x: this.state.xPositions[0], opacity: 0 }]
 			};
 
-		items.some(function (item, i) {
+		data.some(function (item, i) {
 			item.x = this.state.xPositions[i + 1];
 			item.opacity = (i >= this.state.visibleItems) ? 0 : 1;
-			state.dom.items.push(item);
+			state.items.push(item);
 			return (i >= this.state.visibleItems);
 		}, this);
 
@@ -80,27 +76,62 @@ var App = React.createClass({
 		}
 	},
 	horizontalKeyHandler: function (direction) {
-		var newItem = this.state.highlightedItem + direction;
-		if (newItem < 1) {
-			return;
-		} else if (newItem > this.state.visibleItems) {
+		var newItemIndex = this.state.highlightedItem + direction;
+		if (newItemIndex < 1) {
 			this.navigateHorizontal(direction);
-		} else if (this.state.dom.items[this.state.highlightedItem + direction]) {
+		} else if (newItemIndex > this.state.visibleItems) {
+			this.navigateHorizontal(direction);
+		} else if (this.state.items[this.state.highlightedItem + direction]) {
 			this.setState({
-				highlightedItem: this.state.highlightedItem + direction
+				highlightedItem: this.state.highlightedItem + direction,
+				highlightedData: this.state.highlightedData + direction
 			});
 		}
 	},
 	navigateHorizontal: function (direction) {
-		console.log("navigateHorizontal", direction);
+		console.log("navigateHorizontal");
+		/*var state = {
+				items: []
+			},
+			xIndex;
+		if (this.state.data[this.state.highlightedData + direction]) {
+			state.highlightedData = this.state.highlightedData + direction;
+			state.highlightedItem = this.state.highlightedItem + direction;
+
+			if (state.highlightedItem < 0) {
+				state.highlightedItem = this.state.xPositions.length - 1;
+			} else if (state.highlightedItem === this.state.xPositions.length) {
+				state.highlightedItem = 0;
+			}
+
+			this.state.items.forEach(function (item, i) {
+				var newItem = item;
+				xIndex = this.state.xPositions.indexOf(newItem.x) - direction;
+				if (xIndex < 0) {
+					xIndex = this.state.xPositions.length - 1;
+					newItem = this.state.data[this.state.highlightedData + direction];
+				} else if (xIndex === this.state.xPositions.length) {
+					xIndex = 0;
+					newItem = this.state.data[this.state.highlightedData + direction];
+				}
+				newItem.x = this.state.xPositions[xIndex];
+				newItem.opacity = (xIndex === 0 || xIndex > this.state.visibleItems) ? 0 : 1;
+				console.log(xIndex, newItem.x, newItem.opacity);
+				state.items.push(newItem);
+			}, this);
+
+
+
+
+			this.setState(state);
+			//console.log(this.state.highlightedData + direction, this.state.data[this.state.highlightedData + direction]);
+		}*/
 		/*var items = [],
 			xIndex,
 			state = {
-				dom: {
-					items: []
-				}
+				items: []
 			};
-		this.state.dom.items.forEach(function (item, i) {
+		this.state.items.forEach(function (item, i) {
 			xIndex = this.state.xPositions.indexOf(item.x) - direction;
 			if (xIndex < 0) {
 				xIndex = this.state.xPositions.length - 1;
@@ -110,7 +141,7 @@ var App = React.createClass({
 			console.log(this.state.xPositions.indexOf(item.x), xIndex, (xIndex === 0 || xIndex > this.state.visibleItems) ? 0 : 1);
 			item.x = this.state.xPositions[xIndex];
 			item.opacity = (xIndex === 0 || xIndex > this.state.visibleItems) ? 0 : 1;
-			state.dom.items.push(item);
+			state.items.push(item);
 		}, this);
 		this.setState(state);*/
 	},
