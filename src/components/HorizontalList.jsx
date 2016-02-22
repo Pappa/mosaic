@@ -3,9 +3,9 @@ var React = require('react'),
 	ListItem = require('./ListItem.jsx');
 
 var HorizontalList = React.createClass({
-	shouldComponentUpdate: function(newProps, newState) {
+	/*shouldComponentUpdate: function(newProps, newState) {
 	    return (newProps.highlightedItem !== this.props.highlightedItem);
-	},
+	},*/
 	render: function() {
 		var items = [],
 			style = {
@@ -18,9 +18,7 @@ var HorizontalList = React.createClass({
 				itemProps = {
 					key: i,
 					highlighted: (i === this.props.highlightedItem),
-					item: this.props.items[i],
-					x: x,
-					opacity: (i === 0 || i === xPositions.length - 1) ? 0 : 1
+					item: this.props.items[i]
 				};
 				items.push(<ListItem {...itemProps} />);
 			}

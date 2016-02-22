@@ -2,16 +2,16 @@
 var React = require('react');
 
 var ListItem = React.createClass({
-	shouldComponentUpdate: function(newProps, newState) {
+	/*shouldComponentUpdate: function(newProps, newState) {
 	    return (newProps.highlighted !== this.props.highlighted);
-	},
+	},*/
 	render: function() {
 		var title = (this.props.item && this.props.item.title) ? this.props.item.title : "",
 			url = (this.props.item && this.props.item.art) ? this.props.item.art.url : "",
 			cssClass = "listItem",
 			style = {
-				left: this.props.x,
-				opacity: this.props.opacity
+				left: this.props.item.x,
+				opacity: this.props.item.opacity
 			};
 		if (this.props.highlighted) {
 			cssClass += " highlighted";
