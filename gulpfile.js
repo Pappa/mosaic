@@ -46,7 +46,7 @@ gulp.task('html', function() {
 });
 
 gulp.task('js', function() {
-	browserify(config.paths.mainJs)
+	browserify(config.paths.mainJs, {debug: true})
 		.transform(reactify, config.reactify)
 		.bundle()
 		.on('error', console.error.bind(console))

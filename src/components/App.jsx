@@ -12,8 +12,8 @@ var App = React.createClass({
 			data: [],
 			items: [],
 			visibleItems: 3,
-			highlightedItem: 1,
-			highlightedData: 0,
+			highlightedItem: 2,
+			highlightedData: 1,
 			xPositions: [-360, 0, 360, 720, 1080]
 		};
 	},
@@ -50,12 +50,11 @@ var App = React.createClass({
 	setStateOnLoad: function (data) {
 		var state = {
 				data: data,
-				items: [{ x: this.state.xPositions[0]/*, opacity: 0 */}]
+				items: [{ x: this.state.xPositions[0]}]
 			};
 
 		data.some(function (item, i) {
 			item.x = this.state.xPositions[i + 1];
-			/*item.opacity = (i >= this.state.visibleItems) ? 0 : 1;*/
 			state.items.push(item);
 			return (i >= this.state.visibleItems);
 		}, this);
@@ -87,13 +86,20 @@ var App = React.createClass({
 			} else {
 				this.state.highlightedItem = _L.nextIndex(xPositions, this.state.highlightedItem);
 			}
-			this.state.items.forEach(function (item) {
+			this.state.items.forEach(function (item, index, arr) {
 				xIndex = xPositions.indexOf(item.x);
-				if (direction > 0) {
-					item.x = _L.previous(xPositions, xIndex);
-				} else {
-					item.x = _L.next(xPositions, xIndex);
+				/*if (xIndex === 0 && direction < 0) {
+					arr[index] = this.state.data[this.state.highlightedData + xPositions.length - 2];
 				}
+				if (xIndex === xPositions.length - 1 && direction > 0) {
+					arr[index] = this.state.data[this.state.highlightedData - xPositions.length + 2];
+				}*/
+				if (direction > 0) {
+					arr[index].x = _L.previous(xPositions, xIndex);
+				} else {
+					arr[index].x = _L.next(xPositions, xIndex);
+				}
+				console.log(arr[index].x);
 				// TODO: update with new data
 			}, this);
 			this.setState(this.state);

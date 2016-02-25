@@ -109,6 +109,15 @@ var _L = (function () {
 		 */
 		next: function (arr, index) {
 			return arr[this.nextIndex(arr, index)];
+		},
+
+		/**
+		 * Returns the last element in an array
+		 * @method last
+		 * @param {Array} arr
+		 */
+		last: function (arr, index) {
+			return arr[arr.length - 1];
 		}
 
 	};
