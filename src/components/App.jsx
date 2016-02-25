@@ -66,24 +66,27 @@ var App = React.createClass({
 		e.preventDefault();
 		switch (e.keyCode) {
 			case Keys.LEFT:
-				this.horizontalKeyHandler(-1);
+				this.navigateHorizontal(-1);
 			break;
 			case Keys.RIGHT:
-				this.horizontalKeyHandler(1);
+				this.navigateHorizontal(1);
 			break;
 			case Keys.SELECT:
 				console.log("SELECT");
 			break;
 		}
 	},
-	horizontalKeyHandler: function (direction) {
+	navigateHorizontal: function (direction) {
 		var newData = this.state.data[this.state.highlightedData + direction],
 			xPositions = this.state.xPositions,
 			xIndex = 0;
 		if (newData) {
 			this.state.highlightedData = this.state.highlightedData + direction;
-			// TODO: fix the following line when direction === -1
-			this.state.highlightedItem = (this.state.highlightedData + direction) % xPositions.length;
+			if (direction < 0) {
+				this.state.highlightedItem = _L.previousIndex(xPositions, this.state.highlightedItem);
+			} else {
+				this.state.highlightedItem = _L.nextIndex(xPositions, this.state.highlightedItem);
+			}
 			this.state.items.forEach(function (item) {
 				xIndex = xPositions.indexOf(item.x);
 				if (direction > 0) {
@@ -95,10 +98,7 @@ var App = React.createClass({
 			}, this);
 			this.setState(this.state);
 		}
-	},
-	navigateHorizontal: function (direction) {
-		console.log("navigateHorizontal");
-	},
+	}
  });
 
 module.exports = App;
