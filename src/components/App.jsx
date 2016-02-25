@@ -54,8 +54,8 @@ var App = React.createClass({
 			};
 
 		data.some(function (item, i) {
-			item.x = this.state.xPositions[i + 1];
-			state.items.push(item);
+			state.items.splice(i + 1, 0, item);
+			state.items[i + 1].x = this.state.xPositions[i + 1];
 			return (i >= this.state.visibleItems);
 		}, this);
 
@@ -89,17 +89,16 @@ var App = React.createClass({
 			this.state.items.forEach(function (item, index, arr) {
 				xIndex = xPositions.indexOf(item.x);
 				/*if (xIndex === 0 && direction < 0) {
-					arr[index] = this.state.data[this.state.highlightedData + xPositions.length - 2];
+					arr.splice(index, 0, this.state.data[this.state.highlightedData + 2]);
 				}
 				if (xIndex === xPositions.length - 1 && direction > 0) {
-					arr[index] = this.state.data[this.state.highlightedData - xPositions.length + 2];
+					arr.splice(index, 0, this.state.data[this.state.highlightedData - 2]);
 				}*/
 				if (direction > 0) {
 					arr[index].x = _L.previous(xPositions, xIndex);
 				} else {
 					arr[index].x = _L.next(xPositions, xIndex);
 				}
-				console.log(arr[index].x);
 				// TODO: update with new data
 			}, this);
 			this.setState(this.state);
